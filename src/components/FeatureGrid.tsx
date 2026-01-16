@@ -3,33 +3,33 @@ import { motion } from 'framer-motion';
 import { ParallaxCard } from 'd:/WallSense_desktop/WallSense/src/components/ParallaxCard.tsx';
 import { Layers, Zap, Globe, Shield, Cpu, BoxIcon } from 'lucide-react';
 const features = [{ 
-  title: 'Spatial Computing',
-  description: 'Navigate 3D environments with natural gestures and intuitive controls designed for the next era of web.',
+  title: 'Пространственные вычисления',
+  description: 'Перемещайтесь в 3D-среде с помощью естественных жестов и интуитивно понятных элементов управления, разработанных для новой эры Интернета.',
   icon: BoxIcon,
   color: 'cyan'
 }, {
-  title: 'Neural Interface',
-  description: 'Direct neural pathways allow for zero-latency interaction between thought and digital execution.',
+  title: 'Нейронный интерфейс',
+  description: 'Прямые нейронные пути обеспечивают взаимодействие между мышлением и цифровым исполнением с нулевой задержкой.',
   icon: Zap,
   color: 'purple'
 }, {
-  title: 'Global Mesh',
-  description: 'Connect to the decentralized grid from anywhere in the physical world with redundant satellite uplinks.',
+  title: 'Глобальная сетка',
+  description: 'Подключайтесь к децентрализованной сети из любой точки физического мира с помощью резервных спутниковых каналов связи.',
   icon: Globe,
   color: 'cyan'
 }, {
-  title: 'Quantum Security',
-  description: 'End-to-end encryption secured by quantum key distribution ensures your data remains yours forever.',
+  title: 'Квантовая безопасность',
+  description: 'Сквозное шифрование, защищенное квантовым распределением ключей, гарантирует, что ваши данные останутся вашими навсегда.',
   icon: Shield,
   color: 'purple'
 }, {
-  title: 'Layered Reality',
-  description: 'Seamlessly blend digital artifacts with the physical world using our advanced passthrough engine.',
+  title: 'Многослойная реальность',
+  description: 'Легко сочетайте цифровые артефакты с физическим миром, используя наш продвинутый механизм сквозного просмотра.',
   icon: Layers,
   color: 'cyan'
 }, {
-  title: 'Edge Processing',
-  description: 'Distributed compute nodes handle heavy rendering loads, delivering photorealistic fidelity to any device.',
+  title: 'Обработка кромок',
+  description: 'Распределенные вычислительные узлы справляются с большими нагрузками на рендеринг, обеспечивая фотореалистичную точность на любом устройстве.',
   icon: Cpu,
   color: 'purple'
 }] as const;
@@ -46,11 +46,11 @@ export function FeatureGrid() {
         once: true
       }} className="mb-20 text-center">
           <h2 className="mb-4 text-3xl font-bold text-white md:text-5xl">
-            Core Systems
+            Основные системы
           </h2>
           <p className="mx-auto max-w-2xl text-slate-400">
-            Built on advanced architecture designed to handle the demands of the
-            metaverse.
+            Построенный на основе передовой архитектуры, разработанной с
+учетом требований метавселенной.
           </p>
         </motion.div>
 

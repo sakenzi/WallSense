@@ -38,16 +38,15 @@ export function TechShowcase() {
 
         <div className="relative z-10">
           <h2 className="mb-6 text-4xl font-bold text-white md:text-5xl">
-            Engineered for <span className="text-cyan-400">Performance</span>
+            Разработанный для <span className="text-cyan-400">Представление</span>
           </h2>
           <p className="mb-8 text-lg text-slate-400">
-            Our proprietary rendering engine optimizes 3D assets in real-time,
-            ensuring buttery smooth 120fps experiences across all supported
-            devices.
+            Наш фирменный движок рендеринга оптимизирует 3D-объекты в режиме реального времени,
+            обеспечивая плавное воспроизведение со скоростью 120 кадров в секунду на всех поддерживаемых устройствах.
           </p>
 
           <ul className="space-y-4">
-            {['Zero-latency physics engine', 'Real-time ray tracing support', 'Adaptive resolution scaling', 'Cloud-native asset streaming', 'Cross-platform synchronization'].map((item, i) => <motion.li key={item} initial={{
+            {['Физический движок с нулевой задержкой', 'Поддержка трассировки лучей в реальном времени', 'Адаптивное масштабирование разрешения', 'Облачная потоковая передача собственных ресурсов', 'Кросс-платформенная синхронизация'].map((item, i) => <motion.li key={item} initial={{
             opacity: 0,
             x: -20
           }} whileInView={{

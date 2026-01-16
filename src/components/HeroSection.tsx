@@ -84,31 +84,31 @@ export function HeroSection() {
         <div className="mb-6 inline-flex items-center rounded-full border border-cyan-500/30 bg-cyan-950/30 px-4 py-1.5 backdrop-blur-sm">
           <span className="flex h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]" />
           <span className="ml-3 text-sm font-medium tracking-wide text-cyan-300">
-            NEXT GEN IMMERSION
+            ПОГРУЖЕНИЕ В НОВОЕ ПОКОЛЕНИЕ
           </span>
         </div>
 
         <h1 className="mb-8 max-w-4xl text-6xl font-bold tracking-tight text-white md:text-8xl">
           <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
-            Reality
+            Virtual
           </span>
           <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 bg-[length:200%_auto] animate-gradient">
-            Reimagined
+            Reality
           </span>
         </h1>
 
         <p className="mb-12 max-w-2xl text-lg text-slate-400 md:text-xl">
-          Experience the digital frontier with unparalleled depth and presence.
-          Where physical constraints dissolve into infinite possibilities.
+          Окунитесь в мир цифровых технологий с беспрецедентной глубиной и присутствием.
+          Здесь физические ограничения растворяются в бесконечных возможностях.
         </p>
 
         <div className="flex flex-col gap-4 sm:flex-row">
           <button className="group relative overflow-hidden rounded-lg bg-white px-8 py-4 font-bold text-black transition-transform hover:scale-105">
-            <span className="relative z-10">Enter Simulation</span>
+            <span className="relative z-10">Войдите в симуляцию</span>
             <div className="absolute inset-0 -z-0 bg-gradient-to-r from-cyan-400 to-purple-400 opacity-0 transition-opacity group-hover:opacity-100" />
           </button>
           <button className="rounded-lg border border-white/10 bg-white/5 px-8 py-4 font-bold text-white backdrop-blur-sm transition-colors hover:bg-white/10">
-            View Specs
+            Просмотр спецификаций
           </button>
         </div>
       </motion.div>
