@@ -4,9 +4,15 @@ import { HeroSection } from "../components/HeroSection";
 import { FeatureGrid } from "../components/FeatureGrid";
 import { TechShowcase } from "../components/TechShowcase";
 import { ParticleField } from "../components/ParticleField";
+import { SpecsPage } from "./SpecsPage";
 
 export function ParallaxLanding() {
   const [authOpen, setAuthOpen] = useState(false);
+  const [page, setPage] = useState<"home" | "specs">("home");
+
+  if (page === "specs") {
+  return <SpecsPage onBack={() => setPage("home")} />;
+  }
 
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden bg-[#0a1128] text-white selection:bg-cyan-500/30">
@@ -45,7 +51,7 @@ export function ParallaxLanding() {
         </div>
       </nav>
 
-      <HeroSection />
+      <HeroSection onSpecs={() => setPage("specs")} />
 
       <div className="relative z-10 bg-gradient-to-b from-[#0a1128] to-[#050510]">
         <FeatureGrid />

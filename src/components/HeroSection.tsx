@@ -1,7 +1,12 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ScanFace, Cpu, Grid } from 'lucide-react';
-export function HeroSection() {
+
+type HeroSectionProps = {
+  onSpecs: () => void;
+};
+
+export function HeroSection({ onSpecs }: HeroSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const {
     scrollYProgress
@@ -107,7 +112,10 @@ export function HeroSection() {
             <span className="relative z-10">Войдите в симуляцию</span>
             <div className="absolute inset-0 -z-0 bg-gradient-to-r from-cyan-400 to-purple-400 opacity-0 transition-opacity group-hover:opacity-100" />
           </button>
-          <button className="rounded-lg border border-white/10 bg-white/5 px-8 py-4 font-bold text-white backdrop-blur-sm transition-colors hover:bg-white/10">
+          <button
+            onClick={onSpecs}
+            className="rounded-lg border border-white/10 bg-white/5 px-8 py-4 font-bold text-white backdrop-blur-sm transition-colors hover:bg-white/10"
+          >
             Просмотр спецификаций
           </button>
         </div>
