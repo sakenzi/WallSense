@@ -4,9 +4,10 @@ import { ScanFace, Cpu, Grid } from 'lucide-react';
 
 type HeroSectionProps = {
   onSpecs: () => void;
+  onSim: () => void;
 };
 
-export function HeroSection({ onSpecs }: HeroSectionProps) {
+export function HeroSection({ onSpecs, onSim }: HeroSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const {
     scrollYProgress
@@ -108,7 +109,7 @@ export function HeroSection({ onSpecs }: HeroSectionProps) {
         </p>
 
         <div className="flex flex-col gap-4 sm:flex-row">
-          <button className="group relative overflow-hidden rounded-lg bg-white px-8 py-4 font-bold text-black transition-transform hover:scale-105">
+          <button onClick={onSim} className="group relative overflow-hidden rounded-lg bg-white px-8 py-4 font-bold text-black transition-transform hover:scale-105">
             <span className="relative z-10">Войдите в симуляцию</span>
             <div className="absolute inset-0 -z-0 bg-gradient-to-r from-cyan-400 to-purple-400 opacity-0 transition-opacity group-hover:opacity-100" />
           </button>
@@ -118,6 +119,7 @@ export function HeroSection({ onSpecs }: HeroSectionProps) {
           >
             Просмотр спецификаций
           </button>
+
         </div>
       </motion.div>
 
