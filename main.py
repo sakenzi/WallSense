@@ -6,7 +6,7 @@ from app.router import route as auth_route
 
 app = FastAPI()
 
-app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+# app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 origins = [
     "http://192.168.193.31:5173",  

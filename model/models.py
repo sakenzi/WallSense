@@ -23,3 +23,5 @@ class User(Base):
     company = Column(String(100), nullable=True)
     email = Column(String, unique=True, nullable=True)
     password = Column(String, nullable=True)
+
+    
