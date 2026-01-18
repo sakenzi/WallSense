@@ -1,14 +1,54 @@
 import React, { useState } from "react";
+import { loginUser, registerUser } from "../api/auth";
+import { saveAuth } from "../utils/authStorage";
 
 interface AuthModalProps {
   open: boolean;
   onClose: () => void;
+  onAuthed: (email: string) => void;
 }
 
-export function AuthModal({ open, onClose }: AuthModalProps) {
+export function AuthModal({ open, onClose, onAuthed }: AuthModalProps) {
   const [mode, setMode] = useState<"login" | "register">("login");
 
+  const [fullname, setFullname] = useState("");
+  const [company, setCompany] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   if (!open) return null;
+
+  const resetError = () => setError(null);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    resetError();
+    setLoading(true);
+
+    try {
+      if (mode === "register") {
+        await registerUser({ fullname, company, email, password });
+        // после регистрации автоматически логинимся:
+        const token = await loginUser({ email, password });
+        saveAuth(token.access_token, email);
+        onAuthed(email);
+        onClose();
+        return;
+      }
+
+      const token = await loginUser({ email, password });
+      saveAuth(token.access_token, email);
+      onAuthed(email);
+      onClose();
+    } catch (err: any) {
+      setError(err?.message || "Ошибка авторизации");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm">
@@ -17,40 +57,61 @@ export function AuthModal({ open, onClose }: AuthModalProps) {
           <h2 className="text-2xl font-bold">
             {mode === "login" ? "Вход" : "Регистрация"}
           </h2>
-          <button
-            onClick={onClose}
-            className="text-slate-400 hover:text-white"
-          >
+          <button onClick={onClose} className="text-slate-400 hover:text-white">
             ✕
           </button>
         </div>
 
-        <form className="space-y-4">
+        {error && (
+          <div className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+            {error}
+          </div>
+        )}
+
+        <form className="space-y-4" onSubmit={onSubmit}>
           {mode === "register" && (
-            <input
-              type="text"
-              placeholder="Имя"
-              className="w-full rounded-lg bg-white/5 px-4 py-3 outline-none ring-cyan-500/40 focus:ring-2"
-            />
+            <>
+              <input
+                value={fullname}
+                onChange={(e) => setFullname(e.target.value)}
+                placeholder="Имя и фамилия"
+                className="w-full rounded-lg bg-white/5 px-4 py-3 outline-none ring-cyan-500/40 focus:ring-2"
+              />
+              <input
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                placeholder="Компания"
+                className="w-full rounded-lg bg-white/5 px-4 py-3 outline-none ring-cyan-500/40 focus:ring-2"
+              />
+            </>
           )}
 
           <input
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             className="w-full rounded-lg bg-white/5 px-4 py-3 outline-none ring-cyan-500/40 focus:ring-2"
           />
 
           <input
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Пароль"
             className="w-full rounded-lg bg-white/5 px-4 py-3 outline-none ring-cyan-500/40 focus:ring-2"
           />
 
           <button
+            disabled={loading}
             type="submit"
-            className="w-full rounded-lg bg-cyan-500 py-3 font-bold text-black transition hover:bg-cyan-400"
+            className="w-full rounded-lg bg-cyan-500 py-3 font-bold text-black transition hover:bg-cyan-400 disabled:opacity-60"
           >
-            {mode === "login" ? "Войти" : "Создать аккаунт"}
+            {loading
+              ? "Подождите..."
+              : mode === "login"
+              ? "Войти"
+              : "Создать аккаунт"}
           </button>
         </form>
 
@@ -59,7 +120,10 @@ export function AuthModal({ open, onClose }: AuthModalProps) {
             <>
               Нет аккаунта?{" "}
               <button
-                onClick={() => setMode("register")}
+                onClick={() => {
+                  setMode("register");
+                  resetError();
+                }}
                 className="text-cyan-400 hover:underline"
               >
                 Зарегистрироваться
@@ -69,7 +133,10 @@ export function AuthModal({ open, onClose }: AuthModalProps) {
             <>
               Уже есть аккаунт?{" "}
               <button
-                onClick={() => setMode("login")}
+                onClick={() => {
+                  setMode("login");
+                  resetError();
+                }}
                 className="text-cyan-400 hover:underline"
               >
                 Войти

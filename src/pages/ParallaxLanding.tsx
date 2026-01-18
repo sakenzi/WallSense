@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthModal } from "../components/AuthModal";
 import { HeroSection } from "../components/HeroSection";
 import { FeatureGrid } from "../components/FeatureGrid";
@@ -6,19 +6,29 @@ import { TechShowcase } from "../components/TechShowcase";
 import { ParticleField } from "../components/ParticleField";
 import { SimulationPage } from "./SimulationPage";
 import { SpecsPage } from "./SpecsPage";
+import { clearAuth, getEmail, isAuthed } from "../utils/authStorage";
 
 export function ParallaxLanding() {
   const [authOpen, setAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<"login" | "register">("login");
+
+  const [authed, setAuthed] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
   const [page, setPage] = useState<"home" | "specs" | "simulation">("home");
 
+  useEffect(() => {
+    setAuthed(isAuthed());
+    setUserEmail(getEmail());
+  }, []);
+
   if (page === "specs") {
-  return <SpecsPage onBack={() => setPage("home")} />;
+    return <SpecsPage onBack={() => setPage("home")} />;
   }
-  
+
   if (page === "simulation") {
     return <SimulationPage onBack={() => setPage("home")} />;
   }
-
 
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden bg-[#0a1128] text-white selection:bg-cyan-500/30">
@@ -39,20 +49,48 @@ export function ParallaxLanding() {
             <a className="hover:text-cyan-400 transition-colors">Сообщество</a>
           </div>
 
-          {/* AUTH BUTTONS */}
+          {/* Right actions */}
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => setAuthOpen(true)}
-              className="rounded-full border border-white/20 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-            >
-              Войти
-            </button>
-            <button
-              onClick={() => setAuthOpen(true)}
-              className="rounded-full bg-cyan-500 px-4 py-2 text-sm font-bold text-black transition hover:bg-cyan-400"
-            >
-              Регистрация
-            </button>
+            {authed ? (
+              <>
+                <button className="rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/20">
+                  Профиль
+                </button>
+
+                <button
+                  onClick={() => {
+                    clearAuth();
+                    setAuthed(false);
+                    setUserEmail(null);
+                  }}
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-200 hover:bg-white/10"
+                >
+                  Выйти
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => {
+                    setAuthMode("login");
+                    setAuthOpen(true);
+                  }}
+                  className="rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/20"
+                >
+                  Войти
+                </button>
+
+                <button
+                  onClick={() => {
+                    setAuthMode("register");
+                    setAuthOpen(true);
+                  }}
+                  className="rounded-full bg-cyan-500 px-4 py-2 text-sm font-bold text-black transition hover:bg-cyan-400"
+                >
+                  Регистрация
+                </button>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -78,8 +116,18 @@ export function ParallaxLanding() {
             </p>
             <button className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-cyan-500 px-8 py-4 font-bold text-white transition-all hover:scale-105 hover:bg-cyan-400 hover:shadow-[0_0_40px_-10px_rgba(34,211,238,0.5)]">
               <span className="mr-2">Начинайте пробовать прямо сейчас</span>
-              <svg className="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              <svg
+                className="h-5 w-5 transition-transform group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
               </svg>
             </button>
           </div>
@@ -91,7 +139,15 @@ export function ParallaxLanding() {
       </div>
 
       {/* AUTH MODAL */}
-      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
+      <AuthModal
+        open={authOpen}
+        onClose={() => setAuthOpen(false)}
+        defaultMode={authMode}
+        onAuthed={(email) => {
+          setAuthed(true);
+          setUserEmail(email);
+        }}
+      />
     </main>
   );
 }
