@@ -1,43 +1,50 @@
-# 🥽 VR Spatial Detection System  
-## VR-система интеллектуальной детекции и визуализации пространственных данных на основе YOLO
+# Welcome to your Expo app 👋
 
-Проект, посвящённый **разработке VR-системы с динамическим переключением управления и визуализацией пространственных данных**.  
-Система использует **нейросетевую модель** для детекции объектов и позы человека в реальном времени с последующим отображением результатов в виртуальной реальности.
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
----
+## Get started
 
-## 📌 Описание проекта
+1. Install dependencies
 
-Проект представляет собой **интерактивную VR-платформу**, которая объединяет:
-- компьютерное зрение,
-- глубокое обучение,
-- виртуальную реальность.
+   ```bash
+   npm install
+   ```
 
-Система выполняет **real-time детекцию объектов и позы человека**, определяет их пространственные координаты и визуализирует данные в VR-среде.  
-Также реализовано **динамическое переключение управления** между различными объектами (человек, дрон).
+2. Start the app
 
----
+   ```bash
+   npx expo start
+   ```
 
-## 🎯 Основные возможности
+In the output, you'll find options to open the app in a
 
-- 🔍 Детекция объектов в реальном времени  
-- 🧍 Определение позы человека и других объектов (ключевые точки, скелет)  
-- 🕹 Динамическое переключение управления (человек ↔ дрон)  
-- 🥽 Визуализация данных в VR-среде  
-- 📡 Передача координат и ключевых точек в Unity  
-- 🧠 Использование собственной размеченной выборки (CVAT)  
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
----
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## 🧠 Архитектура системы
+## Get a fresh project
 
-```text
-Камера / видеопоток
-        ↓
-Нейросетевая модель детекции и позы 
-        ↓
-Координаты объектов и ключевые точки
-        ↓
-Обработка пространственных данных
-        ↓
-Unity + VR (визуализация)
+When you're ready, run:
+
+```bash
+npm run reset-project
+```
+
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+
+## Learn more
+
+To learn more about developing your project with Expo, look at the following resources:
+
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+
+## Join the community
+
+Join our community of developers creating universal apps.
+
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
