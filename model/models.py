@@ -35,7 +35,7 @@ class EquipmentType(Base):
 
     equipments = relationship("Equipment", back_populates="equipment_type", cascade="all, delete", passive_deletes=True)
 
-
+    
 class Equipment(Base):
     __tablename__ = 'equipments'
 
